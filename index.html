@@ -3,226 +3,1073 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoTrack - AI Carbon Footprint Tracker</title>
+    <title>SINBLOX - Premium Roblox Shop | Lucky Block Rush</title>
     <style>
-        :root {
-            --primary: #2e7d32;
-            --secondary: #81c784;
-            --dark: #1b5e20;
-            --light: #f1f8e9;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        :root {
+            --neon-pink: #ff006e;
+            --neon-blue: #00d9ff;
+            --neon-purple: #b537f2;
+            --dark-bg: rgba(15, 15, 35, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light);
-            margin: 0;
-            padding: 20px;
-            color: #333;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        /* Wallpaper Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.alphacoders.com/134/1347313.png') center/cover no-repeat;
+            z-index: -2;
+            pointer-events: none;
         }
+
+        /* Dark Glassmorphism Overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 35, 0.85);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            margin-bottom: 3rem;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         h1 {
-            color: var(--dark);
-            text-align: center;
-            margin-bottom: 5px;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            letter-spacing: 2px;
+            text-transform: uppercase;
             font-weight: 600;
-            color: var(--dark);
+            margin-bottom: 0.5rem;
         }
-        input, select {
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-sidebar {
+                position: fixed !important;
+                bottom: 0 !important;
+                right: 0 !important;
+                left: 0 !important;
+                top: auto !important;
+                width: 100% !important;
+                max-height: 60vh !important;
+                border-radius: 20px 20px 0 0 !important;
+                z-index: 1000 !important;
+            }
+        }
+
+        /* Shop Grid */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Item Card */
+        .item-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(135deg, transparent, rgba(255, 0, 110, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+
+        .item-card:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.3), 0 0 60px rgba(0, 217, 255, 0.1);
+            transform: translateY(-8px);
+        }
+
+        .item-card:hover::before {
+            animation: shimmer 0.6s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .item-image {
             width: 100%;
-            padding: 12px;
-            border: 2px solid var(--secondary);
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1rem;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(255, 0, 110, 0.1));
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
         }
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
+
+        .item-card:hover .item-image {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
         }
-        button {
-            width: 100%;
-            background-color: var(--primary);
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--neon-pink);
+            position: relative;
+            z-index: 1;
+        }
+
+        .item-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            line-height: 1.4;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .item-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
             color: white;
             border: none;
-            padding: 15px;
+            padding: 0.7rem 1.2rem;
             border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        button:hover {
-            background-color: var(--dark);
+
+        .add-to-cart-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.6), 0 0 40px rgba(181, 55, 242, 0.4);
         }
-        .result-box {
-            display: none;
-            margin-top: 30px;
-            padding: 20px;
+
+        .add-to-cart-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .cart-header {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-badge {
+            background: var(--neon-pink);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .cart-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .cart-items::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            background-color: #e8f5e9;
-            border-left: 5px solid var(--primary);
         }
-        .result-val {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--dark);
-            text-align: center;
-            margin: 10px 0;
+
+        .cart-items::-webkit-scrollbar-thumb {
+            background: var(--neon-pink);
+            border-radius: 10px;
         }
-        .insights {
-            margin-top: 15px;
-            background: white;
-            padding: 15px;
+
+        .cart-item {
+            background: rgba(255, 0, 110, 0.05);
+            padding: 0.8rem;
             border-radius: 8px;
-            border: 1px solid #c8e6c9;
+            border-left: 3px solid var(--neon-pink);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideInCart 0.3s ease-out;
         }
-        .insights h3 {
-            margin-top: 0;
-            color: var(--dark);
+
+        @keyframes slideInCart {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-        .insights ul {
-            padding-left: 20px;
-            margin-bottom: 0;
+
+        .cart-item-info {
+            flex: 1;
         }
-        .insights li {
-            margin-bottom: 8px;
+
+        .cart-item-name {
+            font-weight: 700;
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .cart-item-remove:hover {
+            color: var(--neon-pink);
+            transform: scale(1.2);
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        .cart-divider {
+            height: 1px;
+            background: var(--glass-border);
+            margin: 1rem 0;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .cart-total-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .cart-total-amount {
+            font-size: 1.3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .checkout-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.6), 0 0 50px rgba(255, 0, 110, 0.4);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--dark-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 60px rgba(255, 0, 110, 0.3);
+            backdrop-filter: blur(10px);
+            animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8) translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .modal-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
             font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-btn-cancel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+
+        .modal-btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .modal-btn-submit {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .modal-btn-submit:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+        }
+
+        /* Audio Toggle */
+        .audio-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+            transition: all 0.3s;
+            z-index: 500;
+        }
+
+        .audio-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(255, 0, 110, 0.8);
+        }
+
+        .audio-toggle.playing {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            margin-top: 5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Utilities */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .shop-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .cart-sidebar {
+                position: sticky;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <h1>⚡ SINBLOX</h1>
+        <p class="tagline">✨ Premium Roblox Shop ✨</p>
+        <p class="subtitle">Lucky Block Rush Collection | Best Deals Guaranteed</p>
+    </header>
 
-<div class="container">
-    <h1>🌱 EcoTrack AI</h1>
-    <div class="subtitle">Personalized Carbon Footprint Tracker & Insights</div>
-    
-    <div class="form-group">
-        <label for="electricity">Monthly Electricity Bill (in Rupees):</label>
-        <input type="number" id="electricity" placeholder="e.g., 1500" min="0">
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Shop Grid -->
+        <section class="shop-grid" id="shopGrid"></section>
+
+        <!-- Cart Sidebar -->
+        <aside class="cart-sidebar">
+            <div class="cart-header">
+                🛒 Cart
+                <span class="cart-badge" id="cartBadge">0</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-empty">Your cart is empty</div>
+            </div>
+            <div class="cart-divider"></div>
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-amount" id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" disabled>Checkout</button>
+        </aside>
     </div>
 
-    <div class="form-group">
-        <label for="vehicle">Vehicle Fuel Type & Usage:</label>
-        <select id="vehicle">
-            <option value="none">No Vehicle (Public Transport/Walking)</option>
-            <option value="petrol_bike">Petrol Bike / Scooter</option>
-            <option value="petrol_car">Petrol Car</option>
-            <option value="diesel_car">Diesel Car</option>
-            <option value="ev">Electric Vehicle (EV)</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label for="kms">Approx. Kilometers Driven per Month:</label>
-        <input type="number" id="kms" placeholder="e.g., 300" min="0">
-    </div>
-
-    <div class="form-group">
-        <label for="waste">LPG Cylinders Used per Month:</label>
-        <input type="number" id="waste" placeholder="e.g., 1" min="0" value="1">
-    </div>
-
-    <button onclick="calculateFootprint()">Calculate & Get AI Insights</button>
-
-    <div class="result-box" id="resultBox">
-        <div style="text-align: center; font-weight: 600;">Your Estimated Carbon Footprint:</div>
-        <div class="result-val" id="totalFootprint">0.00 kg CO2 / month</div>
-        
-        <div class="insights">
-            <h3>🤖 AI Personalized Action Plan:</h3>
-            <ul id="aiInsightsList">
-                <!-- Insights will slide in here -->
-            </ul>
+    <!-- Username Modal -->
+    <div class="modal" id="usernameModal">
+        <div class="modal-content">
+            <h2 class="modal-header">Enter Your Roblox Username</h2>
+            <input 
+                type="text" 
+                class="modal-input" 
+                id="usernameInput" 
+                placeholder="Your Roblox Username"
+                autocomplete="off"
+            >
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" id="modalCancel">Cancel</button>
+                <button class="modal-btn modal-btn-submit" id="modalSubmit">Proceed</button>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-function calculateFootprint() {
-    // Get values
-    const electricity = parseFloat(document.getElementById('electricity').value) || 0;
-    const vehicleType = document.getElementById('vehicle').value;
-    const kms = parseFloat(document.getElementById('kms').value) || 0;
-    const lpg = parseFloat(document.getElementById('waste').value) || 0;
+    <!-- Audio Toggle Button -->
+    <button class="audio-toggle" id="audioToggle" title="Toggle Music">🎵</button>
 
-    // Standard Emission Factors (Approx)
-    // Assuming Avg electricity rate of ₹7 per unit, 1 Unit = 0.82 kg CO2
-    const electricCarbon = (electricity / 7) * 0.82; 
-    
-    let vehicleFactor = 0;
-    if (vehicleType === 'petrol_bike') vehicleFactor = 0.05; // per km
-    if (vehicleType === 'petrol_car') vehicleFactor = 0.17;
-    if (vehicleType === 'diesel_car') vehicleFactor = 0.19;
-    if (vehicleType === 'ev') vehicleFactor = 0.02;
-    
-    const transportCarbon = kms * vehicleFactor;
-    const lpgCarbon = lpg * 42.5; // 1 cylinder approx 42.5 kg CO2
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">🎮 SINBLOX - Premium Roblox Shop | All prices in USD</p>
+        <p class="footer-text">© 2024 SINBLOX. Best Premium Packages. All rights reserved.</p>
+    </footer>
 
-    const total = electricCarbon + transportCarbon + lpgCarbon;
+    <script>
+        // ============================================
+        // SHOP DATA & CONFIGURATION
+        // ============================================
+        const SHOP_DATA = {
+            games: [
+                {
+                    id: 'lucky-block-rush-starter',
+                    name: 'Lucky Block Rush Starter Pack',
+                    description: 'Get 50 Lucky Blocks + 1000 Coins to kickstart your adventure!',
+                    price: 39.99,
+                    emoji: '🎮'
+                },
+                {
+                    id: 'lucky-block-rush-deluxe',
+                    name: 'Deluxe Bundle',
+                    description: '200 Lucky Blocks + 5000 Coins + Exclusive Skin',
+                    price: 39.99,
+                    emoji: '✨'
+                },
+                {
+                    id: 'lucky-block-rush-epic',
+                    name: 'Epic Collection',
+                    description: 'Unlimited Lucky Blocks for 30 days + VIP Status',
+                    price: 39.99,
+                    emoji: '👑'
+                },
+                {
+                    id: 'lucky-block-rush-legendary',
+                    name: 'Legendary Pass',
+                    description: 'Lifetime access + All exclusive cosmetics + Priority support',
+                    price: 39.99,
+                    emoji: '⚡'
+                },
+                {
+                    id: 'lucky-block-rush-platinum',
+                    name: 'Platinum Premium',
+                    description: '500 Lucky Blocks + 20,000 Coins + Pet Companion',
+                    price: 39.99,
+                    emoji: '💎'
+                },
+                {
+                    id: 'lucky-block-rush-ultimate',
+                    name: 'Ultimate Edition',
+                    description: 'Everything unlocked + Custom avatar items + Double rewards',
+                    price: 39.99,
+                    emoji: '🔥'
+                }
+            ]
+        };
 
-    // Display Result
-    document.getElementById('totalFootprint').innerText = total.toFixed(2) + " kg CO2 / month";
-    
-    // Generate Rule-Based AI Insights
-    const insightsList = document.getElementById('aiInsightsList');
-    insightsList.innerHTML = ""; // Clear old
+        const CONFIG = {
+            whatsappPhoneNumber: '1234567890', // Replace with your phone number
+            currency: '$',
+            cartStorageKey: 'sinbloxShopCart'
+        };
 
-    let insights = [];
+        // ============================================
+        // CART MANAGEMENT
+        // ============================================
+        class CartManager {
+            constructor() {
+                this.cart = this.loadCart();
+            }
 
-    // Smart customized insights logic
-    if (electricCarbon > 100) {
-        insights.push("Your electricity footprint is high. **AI Recommendation**: Switch to LED bulbs and ensure AC is set to an optimal 24°C to cut emissions by 15%.");
-    } else {
-        insights.push("Great job keeping your electricity consumption stable! Keep turning off appliances at the plug when not in use.");
-    }
+            loadCart() {
+                const stored = localStorage.getItem(CONFIG.cartStorageKey);
+                return stored ? JSON.parse(stored) : [];
+            }
 
-    if (vehicleType === 'petrol_car' || vehicleType === 'diesel_car') {
-        if (kms > 200) {
-            insights.push("High fuel emissions detected. **AI Recommendation**: Try carpooling twice a week or shifting short trips to walking/cycling to save up to " + (transportCarbon * 0.3).toFixed(1) + " kg of CO2.");
+            saveCart() {
+                localStorage.setItem(CONFIG.cartStorageKey, JSON.stringify(this.cart));
+            }
+
+            addItem(item) {
+                const existingItem = this.cart.find(i => i.id === item.id);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    this.cart.push({ ...item, quantity: 1 });
+                }
+                this.saveCart();
+            }
+
+            removeItem(itemId) {
+                this.cart = this.cart.filter(i => i.id !== itemId);
+                this.saveCart();
+            }
+
+            getTotal() {
+                return this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            }
+
+            getItemCount() {
+                return this.cart.reduce((sum, item) => sum + item.quantity, 0);
+            }
+
+            clear() {
+                this.cart = [];
+                this.saveCart();
+            }
         }
-    } else if (vehicleType === 'none') {
-        insights.push("Awesome! Relying on walking or public transport drastically cuts down your transport footprint to zero.");
-    } else if (vehicleType === 'ev') {
-        insights.push("Smart choice using an EV! Try charging it during daytime hours if your grid utilizes solar energy.");
-    }
 
-    if (lpg > 1) {
-        insights.push("LPG usage can be optimized. **AI Recommendation**: Use pressure cookers more often and ensure lids are closed while cooking to save gas.");
-    }
+        // ============================================
+        // WEB AUDIO API SYNTH
+        // ============================================
+        class NeonSynth {
+            constructor() {
+                this.audioContext = null;
+                this.isPlaying = false;
+                this.oscillators = [];
+                this.gains = [];
+            }
 
-    // General actionable item
-    insights.push("Global Goal: Planting just **1 tree per month** can offset about 20 kg of CO2, effectively lowering your net score!");
+            init() {
+                if (this.audioContext) return;
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
 
-    // Append to UI
-    insights.forEach(item => {
-        let li = document.createElement('li');
-        li.innerHTML = item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        insightsList.appendChild(li);
-    });
+            start() {
+                if (this.isPlaying || !this.audioContext) return;
 
-    document.getElementById('resultBox').style.display = 'block';
-    document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
-}
-</script>
+                this.init();
+                const ctx = this.audioContext;
+                const now = ctx.currentTime;
 
+                // Master gain
+                const masterGain = ctx.createGain();
+                masterGain.gain.setValueAtTime(0.3, now);
+                masterGain.connect(ctx.destination);
+
+                // Create a simple synth loop with arpeggiation
+                const notes = [262, 330, 392, 440, 523]; // C, E, G, A, C (pentatonic)
+                const loopDuration = 2;
+
+                const createNoteOscillator = (frequency, startTime, duration) => {
+                    const osc = ctx.createOscillator();
+                    const env = ctx.createGain();
+
+                    osc.frequency.setValueAtTime(frequency, startTime);
+                    osc.type = 'triangle';
+
+                    env.gain.setValueAtTime(0, startTime);
+                    env.gain.linearRampToValueAtTime(0.15, startTime + 0.05);
+                    env.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+
+                    osc.connect(env);
+                    env.connect(masterGain);
+
+                    osc.start(startTime);
+                    osc.stop(startTime + duration);
+
+                    this.oscillators.push(osc);
+                };
+
+                // Schedule 4 loops
+                for (let loop = 0; loop < 4; loop++) {
+                    for (let i = 0; i < notes.length; i++) {
+                        const startTime = now + loop * loopDuration + (i * 0.3);
+                        createNoteOscillator(notes[i], startTime, 0.25);
+                    }
+                }
+
+                this.isPlaying = true;
+
+                // Reset after 4 loops
+                setTimeout(() => {
+                    this.isPlaying = false;
+                }, 4 * loopDuration * 1000 + 500);
+            }
+
+            stop() {
+                this.oscillators.forEach(osc => {
+                    try {
+                        osc.stop();
+                    } catch (e) {}
+                });
+                this.oscillators = [];
+                this.isPlaying = false;
+            }
+        }
+
+        // ============================================
+        // APP INITIALIZATION
+        // ============================================
+        const cartManager = new CartManager();
+        const synth = new NeonSynth();
+        let audioEnabled = false;
+
+        // DOM Elements
+        const shopGrid = document.getElementById('shopGrid');
+        const cartItems = document.getElementById('cartItems');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const usernameModal = document.getElementById('usernameModal');
+        const usernameInput = document.getElementById('usernameInput');
+        const modalCancel = document.getElementById('modalCancel');
+        const modalSubmit = document.getElementById('modalSubmit');
+        const audioToggle = document.getElementById('audioToggle');
+
+        // Initialize Shop
+        function initializeShop() {
+            shopGrid.innerHTML = '';
+            SHOP_DATA.games.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-image">${game.emoji}</div>
+                    <div class="item-name">${game.name}</div>
+                    <div class="item-description">${game.description}</div>
+                    <div class="item-footer">
+                        <div class="item-price">${CONFIG.currency}${game.price}</div>
+                        <button class="add-to-cart-btn" data-item-id="${game.id}">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+                card.querySelector('.add-to-cart-btn').addEventListener('click', () => {
+                    cartManager.addItem(game);
+                    updateCart();
+                    playAudio();
+                    showNotification('✅ Added to cart!');
+                });
+                shopGrid.appendChild(card);
+            });
+        }
+
+        // Update Cart Display
+        function updateCart() {
+            const items = cartManager.cart;
+            const total = cartManager.getTotal();
+            const count = cartManager.getItemCount();
+
+            cartBadge.textContent = count;
+            cartTotal.textContent = `${CONFIG.currency}${total.toFixed(2)}`;
+            checkoutBtn.disabled = items.length === 0;
+
+            if (items.length === 0) {
+                cartItems.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+                return;
+            }
+
+            cartItems.innerHTML = '';
+            items.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">
+                            ${CONFIG.currency}${item.price} × ${item.quantity}
+                        </div>
+                    </div>
+                    <button class="cart-item-remove" data-item-id="${item.id}">×</button>
+                `;
+                cartItem.querySelector('.cart-item-remove').addEventListener('click', () => {
+                    cartManager.removeItem(item.id);
+                    updateCart();
+                    playAudio();
+                });
+                cartItems.appendChild(cartItem);
+            });
+        }
+
+        // Checkout Process
+        checkoutBtn.addEventListener('click', () => {
+            usernameInput.value = '';
+            usernameModal.classList.add('active');
+            usernameInput.focus();
+            playAudio();
+        });
+
+        modalCancel.addEventListener('click', () => {
+            usernameModal.classList.remove('active');
+            playAudio();
+        });
+
+        modalSubmit.addEventListener('click', submitCheckout);
+        usernameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitCheckout();
+        });
+
+        function submitCheckout() {
+            const username = usernameInput.value.trim();
+            if (!username) {
+                alert('Please enter your Roblox username');
+                return;
+            }
+
+            const items = cartManager.cart;
+            const itemsList = items
+                .map(item => `• ${item.name} (${CONFIG.currency}${item.price})`)
+                .join('\n');
+
+            const message = `Hello from SINBLOX! 👋\n\nI'd like to purchase the following items:\n\n${itemsList}\n\n📊 Total: ${CONFIG.currency}${cartManager.getTotal().toFixed(2)}\n\n🎮 Roblox Username: ${username}\n\nThank you! ✨`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${CONFIG.whatsappPhoneNumber}?text=${encodedMessage}`;
+
+            usernameModal.classList.remove('active');
+            cartManager.clear();
+            updateCart();
+            playAudio();
+            showNotification('🎉 Redirecting to WhatsApp...');
+
+            // Redirect to WhatsApp
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 500);
+        }
+
+        // Audio Toggle
+        audioToggle.addEventListener('click', () => {
+            audioEnabled = !audioEnabled;
+            audioToggle.classList.toggle('playing', audioEnabled);
+            if (audioEnabled) {
+                synth.init();
+                synth.start();
+            } else {
+                synth.stop();
+            }
+        });
+
+        function playAudio() {
+            if (audioEnabled && synth.audioContext) {
+                synth.start();
+            }
+        }
+
+        // First Interaction
+        document.addEventListener('click', () => {
+            if (!audioEnabled && !synth.audioContext) {
+                synth.init();
+            }
+        }, { once: true });
+
+        // Notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                font-weight: 700;
+                z-index: 3000;
+                animation: slideInRight 0.3s ease-out;
+                backdrop-filter: blur(10px);
+                border: 1px solid var(--glass-border);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 2500);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeShop();
+            updateCart();
+        });
+    </script>
 </body>
 </html>
