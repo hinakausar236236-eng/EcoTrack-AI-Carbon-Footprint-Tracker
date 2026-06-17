@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack - AI Carbon Footprint Tracker</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --secondary: #81c784;
+            --dark: #1b5e20;
+            --light: #f1f8e9;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        button {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: var(--dark);
+        }
+        .result-box {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #e8f5e9;
+            border-left: 5px solid var(--primary);
+        }
+        .result-val {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--dark);
+            text-align: center;
+            margin: 10px 0;
+        }
+        .insights {
+            margin-top: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #c8e6c9;
+        }
+        .insights h3 {
+            margin-top: 0;
+            color: var(--dark);
+        }
+        .insights ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .insights li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌱 EcoTrack AI</h1>
+    <div class="subtitle">Personalized Carbon Footprint Tracker & Insights</div>
+    
+    <div class="form-group">
+        <label for="electricity">Monthly Electricity Bill (in Rupees):</label>
+        <input type="number" id="electricity" placeholder="e.g., 1500" min="0">
+    </div>
+
+    <div class="form-group">
+        <label for="vehicle">Vehicle Fuel Type & Usage:</label>
+        <select id="vehicle">
+            <option value="none">No Vehicle (Public Transport/Walking)</option>
+            <option value="petrol_bike">Petrol Bike / Scooter</option>
+            <option value="petrol_car">Petrol Car</option>
+            <option value="diesel_car">Diesel Car</option>
+            <option value="ev">Electric Vehicle (EV)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="kms">Approx. Kilometers Driven per Month:</label>
+        <input type="number" id="kms" placeholder="e.g., 300" min="0">
+    </div>
+
+    <div class="form-group">
+        <label for="waste">LPG Cylinders Used per Month:</label>
+        <input type="number" id="waste" placeholder="e.g., 1" min="0" value="1">
+    </div>
+
+    <button onclick="calculateFootprint()">Calculate & Get AI Insights</button>
+
+    <div class="result-box" id="resultBox">
+        <div style="text-align: center; font-weight: 600;">Your Estimated Carbon Footprint:</div>
+        <div class="result-val" id="totalFootprint">0.00 kg CO2 / month</div>
+        
+        <div class="insights">
+            <h3>🤖 AI Personalized Action Plan:</h3>
+            <ul id="aiInsightsList">
+                <!-- Insights will slide in here -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateFootprint() {
+    // Get values
+    const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+    const vehicleType = document.getElementById('vehicle').value;
+    const kms = parseFloat(document.getElementById('kms').value) || 0;
+    const lpg = parseFloat(document.getElementById('waste').value) || 0;
+
+    // Standard Emission Factors (Approx)
+    // Assuming Avg electricity rate of ₹7 per unit, 1 Unit = 0.82 kg CO2
+    const electricCarbon = (electricity / 7) * 0.82; 
+    
+    let vehicleFactor = 0;
+    if (vehicleType === 'petrol_bike') vehicleFactor = 0.05; // per km
+    if (vehicleType === 'petrol_car') vehicleFactor = 0.17;
+    if (vehicleType === 'diesel_car') vehicleFactor = 0.19;
+    if (vehicleType === 'ev') vehicleFactor = 0.02;
+    
+    const transportCarbon = kms * vehicleFactor;
+    const lpgCarbon = lpg * 42.5; // 1 cylinder approx 42.5 kg CO2
+
+    const total = electricCarbon + transportCarbon + lpgCarbon;
+
+    // Display Result
+    document.getElementById('totalFootprint').innerText = total.toFixed(2) + " kg CO2 / month";
+    
+    // Generate Rule-Based AI Insights
+    const insightsList = document.getElementById('aiInsightsList');
+    insightsList.innerHTML = ""; // Clear old
+
+    let insights = [];
+
+    // Smart customized insights logic
+    if (electricCarbon > 100) {
+        insights.push("Your electricity footprint is high. **AI Recommendation**: Switch to LED bulbs and ensure AC is set to an optimal 24°C to cut emissions by 15%.");
+    } else {
+        insights.push("Great job keeping your electricity consumption stable! Keep turning off appliances at the plug when not in use.");
+    }
+
+    if (vehicleType === 'petrol_car' || vehicleType === 'diesel_car') {
+        if (kms > 200) {
+            insights.push("High fuel emissions detected. **AI Recommendation**: Try carpooling twice a week or shifting short trips to walking/cycling to save up to " + (transportCarbon * 0.3).toFixed(1) + " kg of CO2.");
+        }
+    } else if (vehicleType === 'none') {
+        insights.push("Awesome! Relying on walking or public transport drastically cuts down your transport footprint to zero.");
+    } else if (vehicleType === 'ev') {
+        insights.push("Smart choice using an EV! Try charging it during daytime hours if your grid utilizes solar energy.");
+    }
+
+    if (lpg > 1) {
+        insights.push("LPG usage can be optimized. **AI Recommendation**: Use pressure cookers more often and ensure lids are closed while cooking to save gas.");
+    }
+
+    // General actionable item
+    insights.push("Global Goal: Planting just **1 tree per month** can offset about 20 kg of CO2, effectively lowering your net score!");
+
+    // Append to UI
+    insights.forEach(item => {
+        let li = document.createElement('li');
+        li.innerHTML = item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        insightsList.appendChild(li);
+    });
+
+    document.getElementById('resultBox').style.display = 'block';
+    document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
