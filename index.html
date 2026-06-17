@@ -67,15 +67,15 @@
             background: linear-gradient(135deg, rgba(0, 217, 255, 0.3), rgba(255, 0, 110, 0.3));
             border-radius: 200px 200px 0 0;
             z-index: 2;
-            animation: danceMove 3s ease-in-out infinite;
+            animation: danceMoveFurina 2.5s ease-in-out infinite;
             box-shadow: 0 0 60px rgba(0, 217, 255, 0.4), inset -20px -20px 60px rgba(255, 0, 110, 0.2);
         }
 
-        @keyframes danceMove {
-            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-            25% { transform: translateX(30px) translateY(-20px) rotate(5deg); }
-            50% { transform: translateX(0) translateY(-40px) rotate(0deg); }
-            75% { transform: translateX(-30px) translateY(-20px) rotate(-5deg); }
+        @keyframes danceMoveFurina {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg) scaleY(1); }
+            25% { transform: translateX(40px) translateY(-30px) rotate(8deg) scaleY(0.95); }
+            50% { transform: translateX(0) translateY(-50px) rotate(0deg) scaleY(1.02); }
+            75% { transform: translateX(-40px) translateY(-30px) rotate(-8deg) scaleY(0.95); }
         }
 
         .overlay-dark {
@@ -269,8 +269,8 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 3rem;
         }
 
@@ -297,27 +297,20 @@
             }
         }
 
-        .product-card:nth-child(1) { animation-delay: 0.1s; }
-        .product-card:nth-child(2) { animation-delay: 0.15s; }
-        .product-card:nth-child(3) { animation-delay: 0.2s; }
-        .product-card:nth-child(4) { animation-delay: 0.25s; }
-        .product-card:nth-child(5) { animation-delay: 0.3s; }
-        .product-card:nth-child(6) { animation-delay: 0.35s; }
-
         .product-card:hover {
             border-color: var(--neon-pink);
-            transform: translateY(-15px);
+            transform: translateY(-12px);
             box-shadow: 0 20px 60px rgba(255, 0, 110, 0.4), 0 0 40px rgba(0, 217, 255, 0.2);
         }
 
         .product-image {
             width: 100%;
-            height: 200px;
+            height: 140px;
             background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(255, 0, 110, 0.15));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 3rem;
             border-bottom: 2px solid var(--glass-border);
             position: relative;
             overflow: hidden;
@@ -338,36 +331,37 @@
         }
 
         .product-content {
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .product-name {
-            font-size: 1.2rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: var(--neon-pink);
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
         }
 
         .product-description {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.4;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
         }
 
         .product-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-            font-size: 0.8rem;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .stat {
             background: rgba(0, 217, 255, 0.1);
-            padding: 0.6rem;
-            border-radius: 8px;
+            padding: 0.5rem;
+            border-radius: 6px;
             border: 1px solid var(--glass-border);
             text-align: center;
         }
@@ -375,25 +369,26 @@
         .stat-label {
             color: var(--text-secondary);
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
         }
 
         .stat-value {
             color: var(--neon-cyan);
             font-weight: 700;
             display: block;
+            font-size: 0.8rem;
         }
 
         .product-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 1rem;
+            padding-top: 0.8rem;
             border-top: 1px solid var(--glass-border);
         }
 
         .product-price {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
             -webkit-background-clip: text;
@@ -405,20 +400,20 @@
             background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
             color: white;
             border: none;
-            padding: 0.7rem 1.2rem;
-            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: all 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
         }
 
         .add-btn:hover {
             transform: scale(1.08);
-            box-shadow: 0 0 30px rgba(255, 0, 110, 0.6);
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.6);
         }
 
         /* Cart Sidebar */
@@ -431,8 +426,8 @@
             position: fixed;
             right: 2rem;
             top: 150px;
-            width: 320px;
-            max-height: 70vh;
+            width: 300px;
+            max-height: 65vh;
             overflow-y: auto;
             animation: slideInRight 0.8s ease-out;
             z-index: 100;
@@ -476,16 +471,16 @@
         .cart-items {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.8rem;
             margin-bottom: 1.5rem;
-            max-height: 350px;
+            max-height: 300px;
             overflow-y: auto;
         }
 
         .cart-item {
             background: rgba(255, 0, 110, 0.08);
-            padding: 0.9rem;
-            border-radius: 10px;
+            padding: 0.8rem;
+            border-radius: 8px;
             border-left: 3px solid var(--neon-pink);
             display: flex;
             justify-content: space-between;
@@ -495,11 +490,11 @@
         .cart-item-name {
             font-weight: 700;
             color: var(--neon-pink);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .cart-item-price {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
         }
 
@@ -508,7 +503,7 @@
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.2s;
         }
 
@@ -552,17 +547,18 @@
 
         .checkout-btn {
             width: 100%;
-            padding: 1.1rem;
+            padding: 1rem;
             background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
             color: white;
             border: none;
             border-radius: 10px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 0 25px rgba(0, 217, 255, 0.4);
+            font-size: 0.9rem;
         }
 
         .checkout-btn:hover:not(:disabled) {
@@ -626,7 +622,7 @@
 
         .modal-input {
             width: 100%;
-            padding: 1.1rem;
+            padding: 1rem;
             background: rgba(0, 217, 255, 0.05);
             border: 2px solid var(--neon-cyan);
             border-radius: 10px;
@@ -725,8 +721,8 @@
             right: 2rem;
             background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
             color: white;
-            padding: 1.2rem 1.8rem;
-            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
             font-weight: 700;
             z-index: 3000;
             box-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
@@ -784,7 +780,7 @@
             }
 
             .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
     </style>
@@ -800,7 +796,7 @@
     <header>
         <h1>⚡ SINBLOX</h1>
         <p class="tagline">✨ Premium Gaming Shop ✨</p>
-        <p class="subtitle">Roblox Gaming - Cooking Passion Edition</p>
+        <p class="subtitle">Roblox Gaming - Brianiacs Collection</p>
     </header>
 
     <!-- Main Layout -->
@@ -817,7 +813,7 @@
         <!-- Products Section -->
         <main class="products-section">
             <h2 class="section-title">Lucky Block Rush Items</h2>
-            <p class="section-subtitle">Premium in-game products with exclusive rewards</p>
+            <p class="section-subtitle">20+ Premium Brianiacs Packages</p>
             
             <div class="products-grid" id="productsGrid"></div>
         </main>
@@ -868,57 +864,30 @@
 
     <script>
         // ============================================
-        // PRODUCT DATA - Lucky Block Rush
+        // 20+ BRIANIACS PRODUCTS
         // ============================================
         const PRODUCTS = [
-            {
-                id: 'starter-blocks',
-                name: 'Starter Blocks',
-                emoji: '🎁',
-                description: '50 Lucky Blocks + 1000 Coins',
-                price: 9.99,
-                stats: { blocks: 50, coins: '1K' }
-            },
-            {
-                id: 'mega-fortune',
-                name: 'Mega Fortune',
-                emoji: '💰',
-                description: '150 Lucky Blocks + 5000 Coins',
-                price: 24.99,
-                stats: { blocks: 150, coins: '5K' }
-            },
-            {
-                id: 'ultra-wealth',
-                name: 'Ultra Wealth',
-                emoji: '👑',
-                description: '300 Lucky Blocks + 15000 Coins + VIP',
-                price: 39.99,
-                stats: { blocks: 300, coins: '15K' }
-            },
-            {
-                id: 'infinity-pack',
-                name: 'Infinity Pack',
-                emoji: '⚡',
-                description: '500 Lucky Blocks + 50000 Coins + Legendary Pet',
-                price: 59.99,
-                stats: { blocks: 500, coins: '50K' }
-            },
-            {
-                id: 'cosmic-supreme',
-                name: 'Cosmic Supreme',
-                emoji: '🌟',
-                description: '1000 Lucky Blocks + 100K Coins + All Skins',
-                price: 99.99,
-                stats: { blocks: '1K', coins: '100K' }
-            },
-            {
-                id: 'ultimate-legend',
-                name: 'Ultimate Legend',
-                emoji: '💎',
-                description: 'Lifetime Premium + Everything Unlocked',
-                price: 149.99,
-                stats: { blocks: '∞', coins: '∞' }
-            }
+            { id: 'starter-1', name: 'Lucky Start', emoji: '🎁', description: '50 Blocks + 1K Coins', price: 9.99, stats: { blocks: 50, coins: '1K' } },
+            { id: 'starter-2', name: 'First Fortune', emoji: '💰', description: '100 Blocks + 2K Coins', price: 14.99, stats: { blocks: 100, coins: '2K' } },
+            { id: 'starter-3', name: 'Lucky Boost', emoji: '⭐', description: '150 Blocks + 3K Coins', price: 19.99, stats: { blocks: 150, coins: '3K' } },
+            { id: 'starter-4', name: 'Gold Rush', emoji: '🏆', description: '200 Blocks + 5K Coins', price: 24.99, stats: { blocks: 200, coins: '5K' } },
+            { id: 'starter-5', name: 'Mega Pack', emoji: '💎', description: '250 Blocks + 7K Coins', price: 29.99, stats: { blocks: 250, coins: '7K' } },
+            { id: 'standard-1', name: 'Elite Bundle', emoji: '👑', description: '300 Blocks + 10K Coins', price: 39.99, stats: { blocks: 300, coins: '10K' } },
+            { id: 'standard-2', name: 'Premium Class', emoji: '✨', description: '400 Blocks + 15K Coins', price: 49.99, stats: { blocks: 400, coins: '15K' } },
+            { id: 'standard-3', name: 'Deluxe Edition', emoji: '🎯', description: '500 Blocks + 20K Coins', price: 59.99, stats: { blocks: 500, coins: '20K' } },
+            { id: 'standard-4', name: 'Supreme Pack', emoji: '🔥', description: '600 Blocks + 25K Coins + Pet', price: 69.99, stats: { blocks: 600, coins: '25K' } },
+            { id: 'standard-5', name: 'Royal Treasure', emoji: '🌟', description: '700 Blocks + 30K Coins + Skin', price: 79.99, stats: { blocks: 700, coins: '30K' } },
+            { id: 'premium-1', name: 'Ultra Wealth', emoji: '💸', description: '800 Blocks + 40K Coins + VIP', price: 89.99, stats: { blocks: 800, coins: '40K' } },
+            { id: 'premium-2', name: 'Cosmic Power', emoji: '⚡', description: '900 Blocks + 50K Coins + Exclusive', price: 99.99, stats: { blocks: 900, coins: '50K' } },
+            { id: 'premium-3', name: 'Infinity Gems', emoji: '💫', description: '1000 Blocks + 75K Coins + Avatar', price: 119.99, stats: { blocks: '1K', coins: '75K' } },
+            { id: 'premium-4', name: 'Legendary Star', emoji: '🌠', description: '1500 Blocks + 100K Coins + All', price: 149.99, stats: { blocks: '1.5K', coins: '100K' } },
+            { id: 'premium-5', name: 'Mythic Legacy', emoji: '👾', description: '2000 Blocks + 150K Coins + Limited', price: 179.99, stats: { blocks: '2K', coins: '150K' } },
+            { id: 'ultimate-1', name: 'Infinity Edge', emoji: '⚔️', description: '2500 Blocks + 200K Coins + Weapon', price: 199.99, stats: { blocks: '2.5K', coins: '200K' } },
+            { id: 'ultimate-2', name: 'Dimensional Rift', emoji: '🌌', description: '3000 Blocks + 250K Coins + Dimension', price: 229.99, stats: { blocks: '3K', coins: '250K' } },
+            { id: 'ultimate-3', name: 'Godly Ascent', emoji: '🎆', description: '4000 Blocks + 300K Coins + God Tier', price: 269.99, stats: { blocks: '4K', coins: '300K' } },
+            { id: 'ultimate-4', name: 'Eternal Blessing', emoji: '✨', description: '5000 Blocks + 500K Coins + Forever', price: 299.99, stats: { blocks: '5K', coins: '500K' } },
+            { id: 'ultimate-5', name: 'Universe Master', emoji: '🌍', description: 'Unlimited Everything + Lifetime Pass', price: 399.99, stats: { blocks: '∞', coins: '∞' } },
+            { id: 'ultimate-6', name: 'Supreme Crown', emoji: '👑', description: 'Full VIP + All Skins + All Pets', price: 499.99, stats: { blocks: 'Max', coins: 'Max' } }
         ];
 
         // ============================================
@@ -964,9 +933,9 @@
         }
 
         // ============================================
-        // WEB AUDIO API SYNTH
+        // FURINA THEMED WEB AUDIO API SYNTH
         // ============================================
-        class PremiumSynth {
+        class FurinaSynth {
             constructor() {
                 this.audioContext = null;
                 this.isPlaying = false;
@@ -986,22 +955,29 @@
                 const now = ctx.currentTime;
 
                 const masterGain = ctx.createGain();
-                masterGain.gain.setValueAtTime(0.25, now);
+                masterGain.gain.setValueAtTime(0.2, now);
                 masterGain.connect(ctx.destination);
 
-                // Cooking theme inspired notes
-                const notes = [262, 330, 392, 330, 262, 330, 392, 330];
-                const loopDuration = 1.5;
+                // Furina's cooking theme - whimsical and dynamic
+                const melody = [
+                    { freq: 523, time: 0, dur: 0.3 },      // C
+                    { freq: 659, time: 0.3, dur: 0.3 },    // E
+                    { freq: 784, time: 0.6, dur: 0.3 },    // G
+                    { freq: 880, time: 0.9, dur: 0.4 },    // A
+                    { freq: 659, time: 1.3, dur: 0.3 },    // E
+                    { freq: 784, time: 1.6, dur: 0.3 },    // G
+                    { freq: 523, time: 1.9, dur: 0.5 },    // C
+                ];
 
-                for (let loop = 0; loop < 5; loop++) {
-                    for (let i = 0; i < notes.length; i++) {
-                        const startTime = now + loop * loopDuration + (i * 0.15);
-                        this.createNote(notes[i], startTime, 0.12, masterGain);
-                    }
+                for (let loop = 0; loop < 4; loop++) {
+                    melody.forEach(note => {
+                        const startTime = now + loop * 2.5 + note.time;
+                        this.createNote(note.freq, startTime, note.dur, masterGain);
+                    });
                 }
 
                 this.isPlaying = true;
-                setTimeout(() => { this.isPlaying = false; }, 5 * loopDuration * 1000);
+                setTimeout(() => { this.isPlaying = false; }, 4 * 2.5 * 1000 + 500);
             }
 
             createNote(frequency, startTime, duration, masterGain) {
@@ -1012,7 +988,7 @@
                 osc.type = 'sine';
 
                 env.gain.setValueAtTime(0, startTime);
-                env.gain.linearRampToValueAtTime(0.12, startTime + 0.02);
+                env.gain.linearRampToValueAtTime(0.15, startTime + 0.05);
                 env.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
 
                 osc.connect(env);
@@ -1037,7 +1013,7 @@
         // APP INITIALIZATION
         // ============================================
         const cartManager = new CartManager();
-        const synth = new PremiumSynth();
+        const synth = new FurinaSynth();
         let audioEnabled = false;
 
         // DOM Elements
@@ -1056,7 +1032,7 @@
             PRODUCTS.forEach((product, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                card.style.animationDelay = `${index * 0.08}s`;
+                card.style.animationDelay = `${index * 0.05}s`;
                 card.innerHTML = `
                     <div class="product-image">${product.emoji}</div>
                     <div class="product-content">
@@ -1151,10 +1127,12 @@
 
             const items = cartManager.cart;
             const itemsList = items.map(item => `• ${item.name} x${item.quantity} ($${item.price})`).join('\n');
-            const message = `🎮 SINBLOX Gaming Purchase\n\n${itemsList}\n\n💰 Total: $${cartManager.getTotal().toFixed(2)}\n\n👤 Roblox Username: ${username}\n\n✨ Thank you for your purchase!`;
+            const total = cartManager.getTotal().toFixed(2);
+            
+            const message = `🎮 *SINBLOX GAMING PURCHASE* 🎮\n\n*📦 Items:*\n${itemsList}\n\n*💰 Total: $${total}*\n\n👤 *Roblox Username:* ${username}\n\n✨ *Thank you for your purchase!*\n🎯 We'll contact you soon with delivery details`;
 
             const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/1234567890?text=${encodedMessage}`;
+            const whatsappUrl = `https://wa.me/918449859390?text=${encodedMessage}`;
 
             usernameModal.classList.remove('active');
             cartManager.clear();
